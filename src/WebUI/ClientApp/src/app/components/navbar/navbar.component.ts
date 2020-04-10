@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
+import { ROUTES } from '../sidebar/sidebar.component';
 var misc: any = {
   sidebar_mini_active: true
 };
@@ -12,7 +13,7 @@ var misc: any = {
 export class NavbarComponent implements OnInit, OnDestroy {
   private listTitles: any[];
   location: Location;
-
+  title : string = "Covid19"
   private toggleButton: any;
   public isCollapsed = true;
 
@@ -88,19 +89,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     window.removeEventListener("resize", this.updateColor);
   }
-  getTitle() {
-    var titlee = this.location.prepareExternalUrl(this.location.path());
-    if (titlee.charAt(0) === "#") {
-      titlee = titlee.slice(1);
-    }
 
-    for (var item = 0; item < this.listTitles.length; item++) {
-      if (this.listTitles[item].path === titlee) {
-        return this.listTitles[item].title;
-      }
-    }
-    return "Dashboard";
-  }
   sidebarOpen() {
     const toggleButton = this.toggleButton;
     const body = <HTMLElement>(
