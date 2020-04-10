@@ -16,7 +16,9 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { VectorMapComponentComponent } from './components/vector-map-component/vector-map-component.component';
+import { VectorMapComponent } from './components/vector-map/vector-map.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { VectorMapComponentComponent } from './components/vector-map-component/v
     CounterComponent,
     FetchDataComponent,
     TodoComponent,
-    VectorMapComponentComponent
+    VectorMapComponent,
+    NavbarComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

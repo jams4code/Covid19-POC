@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VectorMapComponentComponent } from './vector-map-component.component';
+import { VectorMapComponent } from './vector-map.component';
 
-describe('VectorMapComponentComponent', () => {
-  let component: VectorMapComponentComponent;
-  let fixture: ComponentFixture<VectorMapComponentComponent>;
+describe('VectorMapComponent', () => {
+  let component: VectorMapComponent;
+  let fixture: ComponentFixture<VectorMapComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VectorMapComponentComponent ]
+      declarations: [ VectorMapComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VectorMapComponentComponent);
+    fixture = TestBed.createComponent(VectorMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
