@@ -40,7 +40,7 @@ export const ROUTES: RouteInfo[] = [
     path: "/live",
     title: "Live feed",
     type: "link",
-    icontype: "jam-icons icon-chart-pie-36",
+    icontype: "jam-icons icon-atom",
   }
   
 ];

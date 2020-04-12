@@ -15,12 +15,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 import { ToastrModule } from 'ngx-toastr';
+import { LivefeedComponent } from './livefeed/livefeed.component';
+import { TabsModule } from 'ngx-bootstrap/tabs'
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     TodoComponent,
+    LivefeedComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +36,9 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    TabsModule.forRoot(),
+    CollapseModule.forRoot()
     
 
   ],
