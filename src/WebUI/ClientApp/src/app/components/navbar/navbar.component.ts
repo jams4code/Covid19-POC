@@ -2,9 +2,13 @@ import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
 import { ROUTES } from '../sidebar/sidebar.component';
+
+
 var misc: any = {
   sidebar_mini_active: true
 };
+
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,18 +16,12 @@ var misc: any = {
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   private listTitles: any[];
-  location: Location;
   title : string = "Covid19"
   private toggleButton: any;
   public isCollapsed = true;
 
-  constructor(
-    location: Location,
-    private element: ElementRef,
-    private router: Router,
-    public toastr: ToastrService
-  ) {
-    this.location = location;
+  constructor(private element: ElementRef,private router: Router,public toastr: ToastrService) {
+   
   }
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   updateColor = () => {
@@ -47,10 +45,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (misc.sidebar_mini_active === true) {
       body.classList.remove("sidebar-mini");
       misc.sidebar_mini_active = false;
-      this.showSidebarMessage("Sidebar mini deactivated...");
+      this.showSidebarMessage("- Sidebar mini deactivated...");
     } else {
       body.classList.add("sidebar-mini");
-      this.showSidebarMessage("Sidebar mini activated...");
+      this.showSidebarMessage("- Sidebar mini activated...");
       misc.sidebar_mini_active = true;
     }
 
@@ -66,13 +64,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   showSidebarMessage(message) {
     this.toastr.show(
-      '<span data-notify="icon" class="tim-icons icon-bell-55"></span>',
+      '<span data-notify="icon" class="jam-icons icon-bell-55"></span>',
       message,
       {
         timeOut: 4000,
         closeButton: true,
         enableHtml: true,
-        toastClass: "alert alert-danger alert-with-icon",
+        toastClass: "alert alert-warning alert-with-icon",
         positionClass: "toast-top-right"
       }
     );

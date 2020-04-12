@@ -1,0 +1,128 @@
+
+@import "jamboard/custom/functions";
+@import "jamboard/bootstrap/functions";
+
+@import "jamboard/custom/variables";
+@import "jamboard/bootstrap/variables";
+
+@import "jamboard/custom/mixins";
+@import "jamboard/bootstrap/mixins";
+
+// Bootstrap components
+
+@import "jamboard/bootstrap/root";
+@import "jamboard/bootstrap/reboot";
+@import "jamboard/bootstrap/type";
+@import "jamboard/bootstrap/images";
+@import "jamboard/bootstrap/code";
+@import "jamboard/bootstrap/grid";
+@import "jamboard/bootstrap/tables";
+@import "jamboard/bootstrap/forms";
+@import "jamboard/bootstrap/buttons";
+@import "jamboard/bootstrap/transitions";
+@import "jamboard/bootstrap/dropdown";
+@import "jamboard/bootstrap/button-group";
+@import "jamboard/bootstrap/input-group";
+@import "jamboard/bootstrap/custom-forms";
+@import "jamboard/bootstrap/nav";
+@import "jamboard/bootstrap/navbar";
+@import "jamboard/bootstrap/card";
+@import "jamboard/bootstrap/breadcrumb";
+@import "jamboard/bootstrap/pagination";
+@import "jamboard/bootstrap/badge";
+@import "jamboard/bootstrap/jumbotron";
+@import "jamboard/bootstrap/alert";
+@import "jamboard/bootstrap/progress";
+@import "jamboard/bootstrap/media";
+@import "jamboard/bootstrap/list-group";
+@import "jamboard/bootstrap/close";
+@import "jamboard/bootstrap/modal";
+@import "jamboard/bootstrap/tooltip";
+@import "jamboard/bootstrap/popover";
+@import "jamboard/bootstrap/carousel";
+@import "jamboard/bootstrap/utilities";
+@import "jamboard/bootstrap/print";
+
+// Custom components
+
+@import "jamboard/custom/reboot.scss";
+@import "jamboard/custom/global.scss";
+@import "jamboard/custom/utilities.scss";
+@import "jamboard/custom/alerts.scss";
+@import "jamboard/custom/avatars.scss";
+@import "jamboard/custom/badge.scss";
+@import "jamboard/custom/buttons.scss";
+@import "jamboard/custom/close.scss";
+@import "jamboard/custom/custom-forms.scss";
+@import "jamboard/custom/dropdown.scss";
+@import "jamboard/custom/footer.scss";
+@import "jamboard/custom/forms.scss";
+@import "jamboard/custom/grid.scss";
+@import "jamboard/custom/icons.scss";
+@import "jamboard/custom/images.scss";
+@import "jamboard/custom/input-group.scss";
+@import "jamboard/custom/info-areas.scss";
+@import "jamboard/custom/modal.scss";
+@import "jamboard/custom/nav.scss";
+@import "jamboard/custom/navbar.scss";
+@import "jamboard/custom/pagination.scss";
+@import "jamboard/custom/tabs.scss";
+@import "jamboard/custom/pills.scss";
+@import "jamboard/custom/popover.scss";
+@import "jamboard/custom/progress.scss";
+@import "jamboard/custom/type.scss";
+@import "jamboard/custom/tables";
+@import "jamboard/custom/checkboxes-radio";
+@import "jamboard/custom/fixed-plugin";
+@import "jamboard/custom/sidebar-and-main-panel.scss";
+@import "jamboard/custom/misc.scss";
+@import "jamboard/custom/rtl.scss";
+@import "jamboard/custom/timeline.scss";
+
+// Vendor / Plugins
+
+@import "jamboard/custom/vendor/plugin-datetimepicker.scss";
+@import "jamboard/custom/vendor/plugin-nouislider.scss";
+@import "jamboard/custom/vendor/plugin-fullcalendar.scss";
+@import "jamboard/custom/vendor/plugin-sweetalert2.scss";
+@import "jamboard/custom/vendor/plugin-bootstrap-switch.scss";
+@import "jamboard/custom/vendor/plugin-bootstrap-select.scss";
+@import "jamboard/custom/vendor/plugin-jasny-fileupload.scss";
+@import "jamboard/custom/vendor/plugin-tagsinput.scss";
+@import "jamboard/custom/vendor/plugin-perfect-scrollbar.scss";
+@import "jamboard/custom/vendor/plugin-jquery.jvectormap.scss";
+@import "jamboard/custom/vendor/plugin-datatables.net.scss";
+@import "jamboard/custom/vendor/plugin-animate-bootstrap-notify.scss";
+@import "jamboard/custom/vendor/plugin-card-wizard.scss";
+@import "jamboard/custom/vendor/plugin-chartjs.scss";
+
+// example pages and sections
+
+@import "jamboard/custom/example-pages.scss";
+
+// light mode
+
+@import "jamboard/custom/white-content.scss";
+
+// Cards
+
+@import "jamboard/custom/card";
+@import "jamboard/custom/cards/card-chart";
+@import "jamboard/custom/cards/card-map";
+@import "jamboard/custom/cards/card-user";
+@import "jamboard/custom/cards/card-task";
+@import "jamboard/custom/cards/card-animation-on-hover";
+@import "jamboard/custom/cards/card-collapse";
+@import "jamboard/custom/cards/card-contributions";
+@import "jamboard/custom/cards/card-lock";
+@import "jamboard/custom/cards/card-pricing";
+@import "jamboard/custom/cards/card-profile";
+@import "jamboard/custom/cards/card-plain";
+@import "jamboard/custom/cards/card-register";
+@import "jamboard/custom/cards/card-stats";
+@import "jamboard/custom/cards/card-subcategories";
+@import "jamboard/custom/cards/card-testimonials";
+@import "jamboard/custom/cards/card-wizard";
+
+// Angular Differences
+@import "jamboard/angular-differences/angular-differences";

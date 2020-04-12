@@ -327,7 +327,7 @@ export class HomeComponent implements OnInit {
       }
     };
 
-    this.canvas = document.getElementById("chartLineRed");
+    this.canvas = document.getElementById("chartDeaths");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
@@ -337,10 +337,10 @@ export class HomeComponent implements OnInit {
     gradientStroke.addColorStop(0, "rgba(233,32,16,0)"); //red colors
 
     var data = {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+      labels: ["Feb 1", "Feb 15", "Mar 1", "Mar 15", "Apr 1", "Apr 15"],
       datasets: [
         {
-          label: "Data",
+          label: "Deaths",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#ec250d",
@@ -354,7 +354,7 @@ export class HomeComponent implements OnInit {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [80, 100, 70, 80, 120, 80]
+          data: [307, 910, 2979, 11249, 74065, 108192]
         }
       ]
     };
@@ -365,7 +365,7 @@ export class HomeComponent implements OnInit {
       options: gradientChartOptionsConfigurationWithTooltipRed
     });
 
-    this.canvas = document.getElementById("chartLineGreen");
+    this.canvas = document.getElementById("chartRecovery");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
@@ -375,10 +375,10 @@ export class HomeComponent implements OnInit {
     gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
 
     var data = {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
+      labels: ["Feb 15", "Mar 1", "Mar 15", "Apr 1", "Apr 15"],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Recovery cases",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#00d6b4",
@@ -392,7 +392,7 @@ export class HomeComponent implements OnInit {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [90, 27, 60, 12, 80]
+          data: [5000, 50000, 77542, 194216, 416127]
         }
       ]
     };
@@ -404,23 +404,23 @@ export class HomeComponent implements OnInit {
     });
 
     var chart_labels = [
-      "JAN",
-      "FEB",
-      "MAR",
-      "APR",
-      "MAY",
-      "JUN",
-      "JUL",
-      "AUG",
-      "SEP",
-      "OCT",
-      "NOV",
-      "DEC"
+      "03/02",
+      "10/02",
+      "17/02",
+      "24/02",
+      "02/03",
+      "09/03",
+      "16/03",
+      "23/03",
+      "30/03",
+      "06/04",
+      "13/04",
+      "20/04"
     ];
     this.datasets = [
-      [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
-      [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
-      [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
+      [0, 0, 0, 5, 1000, 200, 500, 2000, 1600, 3500, 5000, 100],
+      [0, 0, 0, 5, 2000, 200, 500, 2000, 1000, 2000, 3500, 1000],
+      [0, 0, 0, 5, 2000, 100, 500, 100, 2000, 500, 2500, 100],
     ];
     this.data = this.datasets[0];
 
@@ -461,7 +461,7 @@ export class HomeComponent implements OnInit {
     };
     this.myChartData = new Chart(this.ctx, config);
 
-    this.canvas = document.getElementById("CountryChart");
+    this.canvas = document.getElementById("chartCases");
     this.ctx = this.canvas.getContext("2d");
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -476,10 +476,10 @@ export class HomeComponent implements OnInit {
         display: false
       },
       data: {
-        labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
+        labels: ["Feb 1", "Feb 15", "Mar 1", "Mar 15", "Apr 1", "Apr 15"],
         datasets: [
           {
-            label: "Countries",
+            label: "Confirmed cases",
             fill: true,
             backgroundColor: gradientStroke,
             hoverBackgroundColor: gradientStroke,
@@ -487,7 +487,7 @@ export class HomeComponent implements OnInit {
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: [53, 20, 10, 80, 100, 45]
+            data: [11946, 67103, 85203, 157774, 851341, 1730000]
           }
         ]
       },

@@ -10,7 +10,7 @@ import * as mapsData from "devextreme/dist/js/vectormap-data/world.js";
 export class VectorMapComponent {
   worldMap: any = mapsData.world;
   countries: Countries;
-
+//TEST DATA
   constructor(service: Service) {
     this.countries = service.getCountries();
     this.customizeTooltip = this.customizeTooltip.bind(this);
