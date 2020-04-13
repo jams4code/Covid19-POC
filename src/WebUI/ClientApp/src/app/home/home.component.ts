@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import Chart from "chart.js";
 
 @Component({
+  styleUrls: ['./home.component.css'],
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
@@ -424,7 +425,7 @@ export class HomeComponent implements OnInit {
     ];
     this.data = this.datasets[0];
 
-    this.canvas = document.getElementById("chartBig1");
+    this.canvas = document.getElementById("infectedPerWeek");
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
@@ -439,7 +440,7 @@ export class HomeComponent implements OnInit {
         labels: chart_labels,
         datasets: [
           {
-            label: "My First dataset",
+            label: "Infected",
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: "#ec250d",

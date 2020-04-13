@@ -30,9 +30,9 @@ namespace Covid19.WebUI
                         context.Database.Migrate();
                     }
 
-                    UserManager<ApplicationUser> userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    //UserManager<ApplicationUser> userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
 
-                    await ApplicationDbContextSeed.SeedAsync(context, userManager);
+                    //await ApplicationDbContextSeed.SeedAsync(context, userManager);
                 }
                 catch (Exception ex)
                 {

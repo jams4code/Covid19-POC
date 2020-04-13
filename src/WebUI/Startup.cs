@@ -63,15 +63,15 @@ namespace Covid19.WebUI
             services.AddOpenApiDocument(configure =>
             {
                 configure.Title = "Covid19 API";
-                configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-                {
-                    Type = OpenApiSecuritySchemeType.ApiKey,
-                    Name = "Authorization",
-                    In = OpenApiSecurityApiKeyLocation.Header,
-                    Description = "Type into the textbox: Bearer {your JWT token}."
-                });
+                //configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                //{
+                //    Type = OpenApiSecuritySchemeType.ApiKey,
+                //    Name = "Authorization",
+                //    In = OpenApiSecurityApiKeyLocation.Header,
+                //    Description = "Type into the textbox: Bearer {your JWT token}."
+                //});
 
-                configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+                //configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
             services.AddSignalR();
         }
@@ -108,7 +108,7 @@ namespace Covid19.WebUI
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             //app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

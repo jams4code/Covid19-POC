@@ -28,47 +28,47 @@ namespace Covid19.Infrastructure
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             if (environment.IsEnvironment("Test"))
             {
-                services.AddIdentityServer()
-                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
-                    {
-                        options.Clients.Add(new Client
-                        {
-                            ClientId = "Covid19.IntegrationTests",
-                            AllowedGrantTypes = { GrantType.ResourceOwnerPassword },
-                            ClientSecrets = { new Secret("secret".Sha256()) },
-                            AllowedScopes = { "Covid19.WebUIAPI", "openid", "profile" }
-                        });
-                    }).AddTestUsers(new List<TestUser>
-                    {
-                        new TestUser
-                        {
-                            SubjectId = "f26da293-02fb-4c90-be75-e4aa51e0bb17",
-                            Username = "jason@clean-architecture",
-                            Password = "Covid19!",
-                            Claims = new List<Claim>
-                            {
-                                new Claim(JwtClaimTypes.Email, "jason@clean-architecture")
-                            }
-                        }
-                    });
+                //services.AddIdentityServer()
+                //    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
+                //    {
+                //        options.Clients.Add(new Client
+                //        {
+                //            ClientId = "Covid19.IntegrationTests",
+                //            AllowedGrantTypes = { GrantType.ResourceOwnerPassword },
+                //            ClientSecrets = { new Secret("secret".Sha256()) },
+                //            AllowedScopes = { "Covid19.WebUIAPI", "openid", "profile" }
+                //        });
+                //    }).AddTestUsers(new List<TestUser>
+                //    {
+                //        new TestUser
+                //        {
+                //            SubjectId = "f26da293-02fb-4c90-be75-e4aa51e0bb17",
+                //            Username = "jason@clean-architecture",
+                //            Password = "Covid19!",
+                //            Claims = new List<Claim>
+                //            {
+                //                new Claim(JwtClaimTypes.Email, "jason@clean-architecture")
+                //            }
+                //        }
+                //    });
             }
             else
             {
-                services.AddIdentityServer()
-                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                //services.AddIdentityServer()
+                //    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
                 services.AddTransient<IDateTime, DateTimeService>();
-                services.AddTransient<IIdentityService, IdentityService>();
+                //services.AddTransient<IIdentityService, IdentityService>();
                 services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
             }
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            //services.AddAuthentication()
+            //    .AddIdentityServerJwt();
 
             return services;
         }
