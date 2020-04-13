@@ -1,8 +1,10 @@
 using Covid19.Application;
+using Covid19.Application.ChatHub;
 using Covid19.Application.Common.Interfaces;
 using Covid19.Infrastructure;
 using Covid19.Infrastructure.Persistence;
 using Covid19.WebUI.Common;
+using Covid19.WebUI.Hubs;
 using Covid19.WebUI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -115,8 +117,8 @@ namespace Covid19.WebUI
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<CovidHub>("/hub");
             });
-
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

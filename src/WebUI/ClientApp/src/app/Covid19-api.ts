@@ -14,6 +14,76 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
+export interface ILiveClient {
+    sendMessage(command: ChatHubCommand): Observable<ChatItemDTO>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class LiveClient implements ILiveClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    sendMessage(command: ChatHubCommand): Observable<ChatItemDTO> {
+        let url_ = this.baseUrl + "/api/Live";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(command);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSendMessage(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSendMessage(<any>response_);
+                } catch (e) {
+                    return <Observable<ChatItemDTO>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ChatItemDTO>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processSendMessage(response: HttpResponseBase): Observable<ChatItemDTO> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ChatItemDTO.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ChatItemDTO>(<any>null);
+    }
+}
+
 export interface ITodoItemsClient {
     create(command: CreateTodoItemCommand): Observable<number>;
     update(id: number, command: UpdateTodoItemCommand): Observable<FileResponse>;
@@ -584,6 +654,86 @@ export class WeatherForecastClient implements IWeatherForecastClient {
         }
         return _observableOf<WeatherForecast[]>(<any>null);
     }
+}
+
+export class ChatItemDTO implements IChatItemDTO {
+    user?: string | undefined;
+    message?: string | undefined;
+
+    constructor(data?: IChatItemDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.user = _data["user"];
+            this.message = _data["message"];
+        }
+    }
+
+    static fromJS(data: any): ChatItemDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChatItemDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["user"] = this.user;
+        data["message"] = this.message;
+        return data; 
+    }
+}
+
+export interface IChatItemDTO {
+    user?: string | undefined;
+    message?: string | undefined;
+}
+
+export class ChatHubCommand implements IChatHubCommand {
+    user?: string | undefined;
+    message?: string | undefined;
+
+    constructor(data?: IChatHubCommand) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.user = _data["user"];
+            this.message = _data["message"];
+        }
+    }
+
+    static fromJS(data: any): ChatHubCommand {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChatHubCommand();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["user"] = this.user;
+        data["message"] = this.message;
+        return data; 
+    }
+}
+
+export interface IChatHubCommand {
+    user?: string | undefined;
+    message?: string | undefined;
 }
 
 export class CreateTodoItemCommand implements ICreateTodoItemCommand {

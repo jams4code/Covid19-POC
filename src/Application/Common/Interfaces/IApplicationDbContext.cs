@@ -10,6 +10,7 @@ namespace Covid19.Application.Common.Interfaces
         DbSet<TodoList> TodoLists { get; set; }
 
         DbSet<TodoItem> TodoItems { get; set; }
+        DbSet<ChatItem> ChatItems { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
