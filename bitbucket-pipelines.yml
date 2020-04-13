@@ -8,6 +8,7 @@ pipelines:
           - cat /etc/*-release
     - step:
         name: NODE Install - Dotnet Build & Dotnet Publish
+        size: 2x
         script:
           - curl -sL https://deb.nodesource.com/setup_12.x | bash -
           - apt-get install -y nodejs
