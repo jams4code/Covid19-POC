@@ -109,7 +109,7 @@ namespace Covid19.WebUI
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseIdentityServer();
+            //app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
