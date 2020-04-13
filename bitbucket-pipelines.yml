@@ -15,6 +15,6 @@ pipelines:
           - npm update
           - node -v
           - npm -v
-          - npm install ./SmartCV/src/WebUI/ClientApp/
-          - dotnet build --configuration Release SmartCV/src/WebUI/WebUI.csproj
-          - dotnet publish --configuration Release SmartCV/src/WebUI/WebUI.csproj
+          - npm install ./Covid19/src/WebUI/ClientApp/
+          - dotnet build --configuration Release Covid19/src/WebUI/WebUI.csproj
+          - dotnet publish --configuration Release Covid19/src/WebUI/WebUI.csproj
