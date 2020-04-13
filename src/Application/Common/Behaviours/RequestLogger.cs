@@ -28,11 +28,10 @@ namespace Covid19.Application.Common.Behaviours
             //{
             //    userName = await _identityService.GetUserNameAsync(userId);
             //}
-
-            //_logger.LogInformation("Covid19 Request: {Name} {@UserId} {@UserName} {@Request}",
-            //    requestName, userId, userName, request);
-            _logger.LogInformation("Covid19 Request: {Name}  {@Request}",
-               requestName, request);
+            var userid = "userid";
+            var username = "username";
+            _logger.LogInformation("Covid19 Request: {Name} {@UserId} {@UserName} {@Request}",
+                requestName, userid, username, request);
         }
     }
 }

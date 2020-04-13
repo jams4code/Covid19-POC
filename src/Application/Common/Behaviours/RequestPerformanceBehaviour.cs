@@ -12,6 +12,7 @@ namespace Covid19.Application.Common.Behaviours
         private readonly Stopwatch _timer;
         private readonly ILogger<TRequest> _logger;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IIdentityService _identityService;
 
         public RequestPerformanceBehaviour(
             ILogger<TRequest> logger, 
@@ -20,7 +21,7 @@ namespace Covid19.Application.Common.Behaviours
             _timer = new Stopwatch();
 
             _logger = logger;
-
+            _currentUserService = currentUserService;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
@@ -42,12 +43,12 @@ namespace Covid19.Application.Common.Behaviours
                 //if (!string.IsNullOrEmpty(userId))
                 //{
                 //    userName = await _identityService.GetUserNameAsync(userId);
-                //}
+                var userid = "userid";
+                var username = "username";
+                
 
-                //_logger.LogWarning("Covid19 Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
-                //    requestName, elapsedMilliseconds, userId, userName, request);
-                _logger.LogWarning("Covid19 Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
-                    requestName, elapsedMilliseconds, request);
+                _logger.LogWarning("Covid19 Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+                    requestName, elapsedMilliseconds, userid, username, request);
             }
 
             return response;
