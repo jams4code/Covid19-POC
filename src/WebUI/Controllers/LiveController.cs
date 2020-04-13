@@ -2,9 +2,6 @@
 using Covid19.Application.ChatHub.Query;
 using Covid19.Application.Common.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Covid19.WebUI.Controllers

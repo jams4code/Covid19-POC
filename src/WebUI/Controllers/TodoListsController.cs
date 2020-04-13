@@ -21,7 +21,7 @@ namespace Covid19.WebUI.Controllers
         [HttpGet("{id}")]
         public async Task<FileResult> Get(int id)
         {
-            var vm = await Mediator.Send(new ExportTodosQuery { ListId = id });
+            ExportTodosVm vm = await Mediator.Send(new ExportTodosQuery { ListId = id });
 
             return File(vm.Content, vm.ContentType, vm.FileName);
         }

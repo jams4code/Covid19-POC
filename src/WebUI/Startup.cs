@@ -1,5 +1,4 @@
 using Covid19.Application;
-using Covid19.Application.ChatHub;
 using Covid19.Application.Common.Interfaces;
 using Covid19.Infrastructure;
 using Covid19.Infrastructure.Persistence;

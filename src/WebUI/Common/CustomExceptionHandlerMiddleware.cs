@@ -31,9 +31,9 @@ namespace Covid19.WebUI.Common
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            var code = HttpStatusCode.InternalServerError;
+            HttpStatusCode code = HttpStatusCode.InternalServerError;
 
-            var result = string.Empty;
+            string result = string.Empty;
 
             switch (exception)
             {
