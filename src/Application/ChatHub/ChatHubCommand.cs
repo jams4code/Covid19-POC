@@ -2,7 +2,6 @@
 using Covid19.Application.Common.Interfaces;
 using Covid19.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Text;

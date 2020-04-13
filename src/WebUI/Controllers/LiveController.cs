@@ -1,4 +1,6 @@
 ﻿using Covid19.Application.ChatHub;
+using Covid19.Application.ChatHub.Query;
+using Covid19.Application.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,11 @@ namespace Covid19.WebUI.Controllers
         public async Task<ActionResult<ChatItemDTO>> SendMessage(ChatHubCommand command)
         {
             return await Mediator.Send(command);
+        }
+        [HttpGet]
+        public async Task<PagedData<ChatItemDTO>> GetAllMessage()
+        {
+            return await Mediator.Send(new ChatHubGetPagedDataQuery());
         }
     }
 }

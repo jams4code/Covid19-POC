@@ -16,6 +16,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 export interface ILiveClient {
     sendMessage(command: ChatHubCommand): Observable<ChatItemDTO>;
+    getAllMessage(): Observable<PagedDataOfChatItemDTO>;
 }
 
 @Injectable({
@@ -81,6 +82,54 @@ export class LiveClient implements ILiveClient {
             }));
         }
         return _observableOf<ChatItemDTO>(<any>null);
+    }
+
+    getAllMessage(): Observable<PagedDataOfChatItemDTO> {
+        let url_ = this.baseUrl + "/api/Live";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllMessage(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllMessage(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedDataOfChatItemDTO>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedDataOfChatItemDTO>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllMessage(response: HttpResponseBase): Observable<PagedDataOfChatItemDTO> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedDataOfChatItemDTO.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedDataOfChatItemDTO>(<any>null);
     }
 }
 
@@ -659,6 +708,7 @@ export class WeatherForecastClient implements IWeatherForecastClient {
 export class ChatItemDTO implements IChatItemDTO {
     user?: string | undefined;
     message?: string | undefined;
+    created?: Date | undefined;
 
     constructor(data?: IChatItemDTO) {
         if (data) {
@@ -673,6 +723,7 @@ export class ChatItemDTO implements IChatItemDTO {
         if (_data) {
             this.user = _data["user"];
             this.message = _data["message"];
+            this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
         }
     }
 
@@ -687,6 +738,7 @@ export class ChatItemDTO implements IChatItemDTO {
         data = typeof data === 'object' ? data : {};
         data["user"] = this.user;
         data["message"] = this.message;
+        data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         return data; 
     }
 }
@@ -694,6 +746,7 @@ export class ChatItemDTO implements IChatItemDTO {
 export interface IChatItemDTO {
     user?: string | undefined;
     message?: string | undefined;
+    created?: Date | undefined;
 }
 
 export class ChatHubCommand implements IChatHubCommand {
@@ -734,6 +787,102 @@ export class ChatHubCommand implements IChatHubCommand {
 export interface IChatHubCommand {
     user?: string | undefined;
     message?: string | undefined;
+}
+
+export class PagedDataOfChatItemDTO implements IPagedDataOfChatItemDTO {
+    data?: ChatItemDTO[] | undefined;
+    page?: Page | undefined;
+
+    constructor(data?: IPagedDataOfChatItemDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["data"])) {
+                this.data = [] as any;
+                for (let item of _data["data"])
+                    this.data!.push(ChatItemDTO.fromJS(item));
+            }
+            this.page = _data["page"] ? Page.fromJS(_data["page"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): PagedDataOfChatItemDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedDataOfChatItemDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.data)) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["page"] = this.page ? this.page.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IPagedDataOfChatItemDTO {
+    data?: ChatItemDTO[] | undefined;
+    page?: Page | undefined;
+}
+
+export class Page implements IPage {
+    size?: number;
+    totalElements?: number;
+    totalPages?: number;
+    pageNumber?: number;
+
+    constructor(data?: IPage) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.size = _data["size"];
+            this.totalElements = _data["totalElements"];
+            this.totalPages = _data["totalPages"];
+            this.pageNumber = _data["pageNumber"];
+        }
+    }
+
+    static fromJS(data: any): Page {
+        data = typeof data === 'object' ? data : {};
+        let result = new Page();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["size"] = this.size;
+        data["totalElements"] = this.totalElements;
+        data["totalPages"] = this.totalPages;
+        data["pageNumber"] = this.pageNumber;
+        return data; 
+    }
+}
+
+export interface IPage {
+    size?: number;
+    totalElements?: number;
+    totalPages?: number;
+    pageNumber?: number;
 }
 
 export class CreateTodoItemCommand implements ICreateTodoItemCommand {
