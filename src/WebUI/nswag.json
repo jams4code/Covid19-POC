@@ -110,7 +110,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "ClientApp/src/app/Covid19-api.ts"
+      "output": "ClientApp/src/app/covid19-api.ts"
     }
   }
 }
