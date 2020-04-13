@@ -39,7 +39,7 @@ export class LivefeedComponent implements OnInit {
  
     ngOnInit() {
         this.hubConnection = new SignalR.HubConnectionBuilder()
-            .withUrl('https://localhost:5001/hub')
+            .withUrl('https://covid19-bd.azurewebsites.net//hub')
             .configureLogging(SignalR.LogLevel.Information)
             .build();
  
