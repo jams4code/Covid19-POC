@@ -47,7 +47,7 @@ export class LivefeedComponent implements OnInit {
  
         this.hubConnection.on('ReceiveMessage', (data: any,data2:any) => {
           this.chat.splice(0,1);  
-          this.chat.push(<ChatItemDTO>{user: data, message: data2});
+          this.chat.push(<ChatItemDTO>{user: data, message: data2, created: new Date()});
         });
     }
 }

@@ -28,3 +28,5 @@
     margin: 0;
     color: #777777;
 }
+.chat .list{height:200px; width:18%;}
+.chat .list{overflow:hidden; overflow-y:scroll;}
